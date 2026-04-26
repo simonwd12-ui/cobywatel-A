@@ -13,38 +13,48 @@
     textarea { resize: none; height: 60px; }
     button { width: 100%; padding: 12px; background: #1a56db; color: white; border: none; border-radius: 8px; font-size: 15px; cursor: pointer; font-weight: bold; }
     button:hover { background: #1446c0; }
-
-    /* PANEL */
-    .panel { display: none; width: 600px; max-width: 100%; }
+    .panel { display: none; width: 620px; max-width: 100%; }
     .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
     .logout-btn { background: none; border: 1px solid #dc3545; color: #dc3545; border-radius: 8px; padding: 6px 14px; cursor: pointer; font-size: 13px; width: auto; }
     .logout-btn:hover { background: #dc3545; color: white; }
-
-    /* STATYSTYKI */
-    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 20px; }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 16px; }
     .stat-box { background: white; border-radius: 12px; padding: 14px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
     .stat-number { font-size: 26px; font-weight: bold; color: #1a1a2e; }
     .stat-label { font-size: 11px; color: #888; margin-top: 4px; }
-    .stat-online { color: #28a745; }
-
-    /* GENEROWANIE */
-    .gen-box { background: white; border-radius: 12px; padding: 16px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+    .gen-box { background: white; border-radius: 12px; padding: 16px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
     .gen-box h4 { margin-bottom: 12px; color: #1a1a2e; font-size: 15px; }
     .gen-row { display: flex; gap: 8px; flex-wrap: wrap; }
     .type-btn { flex: 1; padding: 10px; border-radius: 8px; border: 2px solid #ddd; background: white; color: #444; font-size: 13px; cursor: pointer; font-weight: bold; transition: all 0.2s; width: auto; }
     .type-btn.selected { border-color: #1a56db; background: #e8f0fe; color: #1a56db; }
     .gen-btn { background: #1a56db; color: white; border: none; border-radius: 8px; padding: 11px 20px; cursor: pointer; font-weight: bold; font-size: 14px; width: auto; white-space: nowrap; }
-    .gen-btn:hover { background: #1446c0; }
-    .success { color: #28a745; font-size: 13px; margin-top: 8px; }
+    .success-msg { color: #28a745; font-size: 13px; margin-top: 8px; }
     .error-msg { color: red; font-size: 13px; margin-top: 8px; text-align: center; }
 
-    /* LISTA KLUCZY */
-    .keys-list { max-height: 500px; overflow-y: auto; }
+    /* KONSERWACJA */
+    .maintenance-box { background: white; border-radius: 12px; padding: 16px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); display: flex; justify-content: space-between; align-items: center; }
+    .maintenance-box h4 { color: #1a1a2e; font-size: 15px; margin-bottom: 4px; }
+    .maintenance-box p { font-size: 12px; color: #888; }
+    .toggle-switch { position: relative; width: 52px; height: 28px; flex-shrink: 0; }
+    .toggle-switch input { opacity: 0; width: 0; height: 0; }
+    .toggle-slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background: #ccc; border-radius: 28px; transition: 0.3s; }
+    .toggle-slider:before { content: ""; position: absolute; height: 20px; width: 20px; left: 4px; bottom: 4px; background: white; border-radius: 50%; transition: 0.3s; }
+    input:checked + .toggle-slider { background: #1a56db; }
+    input:checked + .toggle-slider:before { transform: translateX(24px); }
+
+    /* NOTATKI ADMINA */
+    .notes-box { background: white; border-radius: 12px; padding: 16px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+    .notes-box h4 { color: #1a1a2e; font-size: 15px; margin-bottom: 10px; }
+    .notes-area { width: 100%; border: 1px solid #ddd; border-radius: 8px; padding: 10px; font-size: 14px; font-family: Arial, sans-serif; resize: vertical; min-height: 80px; margin-bottom: 8px; }
+    .save-notes-btn { background: #28a745; color: white; border: none; border-radius: 8px; padding: 8px 16px; cursor: pointer; font-size: 14px; width: auto; font-weight: bold; }
+
+    /* KLUCZE */
+    .keys-list { max-height: 450px; overflow-y: auto; }
     .key-box { background: white; border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
     .key-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px; }
     .key-text { font-size: 17px; font-weight: bold; color: #1a1a2e; letter-spacing: 2px; }
-    .key-note { font-size: 12px; color: #666; margin-top: 4px; font-style: italic; }
-    .key-meta { font-size: 11px; color: #aaa; margin-top: 3px; }
+    .key-user { font-size: 13px; color: #1a56db; font-weight: bold; margin-top: 3px; }
+    .key-note { font-size: 12px; color: #666; margin-top: 2px; font-style: italic; }
+    .key-meta { font-size: 11px; color: #aaa; margin-top: 2px; }
     .key-status { font-size: 11px; padding: 3px 9px; border-radius: 20px; font-weight: bold; white-space: nowrap; }
     .status-active { background: #d4edda; color: #155724; }
     .status-used { background: #fff3cd; color: #856404; }
@@ -52,19 +62,22 @@
     .status-expired { background: #e2e3e5; color: #495057; }
     .status-online { background: #cce5ff; color: #004085; }
     .btn-group { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 8px; }
-    .btn-sm { border: none; border-radius: 6px; padding: 5px 10px; cursor: pointer; font-size: 12px; width: auto; color: white; }
+    .btn-sm { border: none; border-radius: 6px; padding: 5px 10px; cursor: pointer; font-size: 12px; width: auto; color: white; font-weight: bold; }
     .btn-copy { background: #6c757d; }
     .btn-kick { background: #fd7e14; }
     .btn-restore { background: #28a745; }
     .btn-delete { background: #dc3545; }
-    .btn-sm:hover { opacity: 0.85; }
-
-    /* BADGE ONLINE */
     .online-dot { width: 8px; height: 8px; background: #28a745; border-radius: 50%; display: inline-block; margin-right: 4px; animation: pulse 1.5s infinite; }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
-
+    .section-title { font-size: 12px; font-weight: bold; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; margin-top: 4px; }
     h3 { color: #1a1a2e; font-size: 18px; }
-    .section-title { font-size: 13px; font-weight: bold; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; margin-top: 16px; }
+
+    /* HISTORIA LOGOWAŃ */
+    .log-box { background: white; border-radius: 12px; padding: 16px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+    .log-box h4 { color: #1a1a2e; font-size: 15px; margin-bottom: 10px; }
+    .log-item { padding: 8px 0; border-bottom: 1px solid #f0f0f0; font-size: 13px; color: #444; }
+    .log-item:last-child { border-bottom: none; }
+    .log-time { font-size: 11px; color: #aaa; }
   </style>
 </head>
 <body>
@@ -100,9 +113,29 @@
       <div class="stat-label">Używane</div>
     </div>
     <div class="stat-box">
-      <div class="stat-number stat-online" id="statOnline">0</div>
+      <div class="stat-number" style="color:#004085" id="statOnline">0</div>
       <div class="stat-label"><span class="online-dot"></span>Online</div>
     </div>
+  </div>
+
+  <!-- Tryb konserwacji -->
+  <div class="maintenance-box">
+    <div>
+      <h4>🔧 Tryb konserwacji</h4>
+      <p>Użytkownicy zobaczą baner z informacją o aktualizacji</p>
+    </div>
+    <label class="toggle-switch">
+      <input type="checkbox" id="maintenanceToggle" onchange="toggleMaintenance()">
+      <span class="toggle-slider"></span>
+    </label>
+  </div>
+
+  <!-- Notatki admina -->
+  <div class="notes-box">
+    <h4>📝 Moje notatki</h4>
+    <textarea class="notes-area" id="adminNotes" placeholder="Twoje prywatne notatki — widoczne tylko dla Ciebie..."></textarea>
+    <button class="save-notes-btn" onclick="saveNotes()">💾 Zapisz notatki</button>
+    <p class="success-msg" id="notesSuccess"></p>
   </div>
 
   <!-- Generowanie kluczy -->
@@ -117,20 +150,26 @@
     <div class="gen-row">
       <button class="gen-btn" onclick="generateKey()">+ Generuj klucz</button>
     </div>
-    <p class="success" id="genSuccess"></p>
+    <p class="success-msg" id="genSuccess"></p>
+  </div>
+
+  <!-- Historia logowań -->
+  <div class="log-box" id="loginLogBox">
+    <h4>📋 Historia logowań</h4>
+    <div id="loginLog"><p style="color:#aaa;font-size:13px;">Ładowanie...</p></div>
   </div>
 
   <!-- Lista kluczy -->
   <p class="section-title">Klucze dostępu</p>
   <div class="keys-list" id="keysList">
-    <p style="color:#888; text-align:center; margin-top:16px;">Ładowanie...</p>
+    <p style="color:#888;text-align:center;margin-top:16px;">Ładowanie...</p>
   </div>
 
 </div>
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-  import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+  import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyBmk6wS524JWhphQ60yK8kbzO6CnoVzyRw",
@@ -143,7 +182,6 @@
 
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
-
   const ADMIN_PASSWORD = "simon2025";
   let selectedType = 'forever';
 
@@ -153,9 +191,8 @@
     if (pass === ADMIN_PASSWORD) {
       document.getElementById('loginScreen').style.display = 'none';
       document.getElementById('adminPanel').style.display = 'block';
-      loadKeys();
-      // Odświeżaj co 15 sekund (online)
-      setInterval(loadKeys, 15000);
+      loadAll();
+      setInterval(loadAll, 15000);
     } else {
       document.getElementById('loginError').innerText = 'Złe hasło!';
     }
@@ -167,7 +204,43 @@
     document.getElementById('adminPassword').value = '';
   }
 
-  // --- WYBÓR TYPU KLUCZA ---
+  // --- ŁADUJ WSZYSTKO ---
+  async function loadAll() {
+    await loadKeys();
+    await loadSettings();
+    loadNotes();
+  }
+
+  // --- TRYB KONSERWACJI ---
+  window.toggleMaintenance = async function() {
+    const enabled = document.getElementById('maintenanceToggle').checked;
+    await setDoc(doc(db, 'settings', 'maintenance'), { enabled });
+  }
+
+  async function loadSettings() {
+    try {
+      const snap = await getDocs(collection(db, 'settings'));
+      snap.forEach(d => {
+        if (d.id === 'maintenance') {
+          document.getElementById('maintenanceToggle').checked = d.data().enabled === true;
+        }
+      });
+    } catch(e) {}
+  }
+
+  // --- NOTATKI ADMINA (localStorage — tylko dla admina) ---
+  function loadNotes() {
+    const saved = localStorage.getItem('adminNotes');
+    if (saved) document.getElementById('adminNotes').value = saved;
+  }
+
+  window.saveNotes = function() {
+    localStorage.setItem('adminNotes', document.getElementById('adminNotes').value);
+    document.getElementById('notesSuccess').innerText = '✅ Zapisano!';
+    setTimeout(() => { document.getElementById('notesSuccess').innerText = ''; }, 2000);
+  }
+
+  // --- WYBÓR TYPU ---
   window.selectType = function(type) {
     selectedType = type;
     document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('selected'));
@@ -189,27 +262,19 @@
     const key = randomKey();
     const note = document.getElementById('keyNote').value.trim();
     const now = new Date();
-
     let expiresAt = null;
-    if (selectedType === 'day') {
-      expiresAt = new Date(now.getTime() + 24 * 60 * 60 * 1000).toISOString();
-    } else if (selectedType === 'month') {
+    if (selectedType === 'day') expiresAt = new Date(now.getTime() + 86400000).toISOString();
+    else if (selectedType === 'month') {
       const exp = new Date(now);
       exp.setMonth(exp.getMonth() + 1);
       expiresAt = exp.toISOString();
     }
-
     await addDoc(collection(db, 'keys'), {
-      key,
-      used: false,
-      kicked: false,
-      note: note || null,
-      type: selectedType,
-      expiresAt,
-      createdAt: now.toISOString(),
-      lastSeen: null
+      key, used: false, kicked: false,
+      note: note || null, type: selectedType,
+      expiresAt, createdAt: now.toISOString(),
+      lastSeen: null, userName: null, loginHistory: []
     });
-
     const typeLabel = selectedType === 'forever' ? 'na zawsze' : selectedType === 'month' ? '1 miesiąc' : '1 dzień';
     document.getElementById('genSuccess').innerText = `✅ Klucz ${key} (${typeLabel}) wygenerowany!`;
     document.getElementById('keyNote').value = '';
@@ -217,7 +282,6 @@
     loadKeys();
   }
 
-  // --- USUŃ ---
   window.deleteKey = async function(id) {
     if (confirm('Czy na pewno chcesz usunąć ten klucz?')) {
       await deleteDoc(doc(db, 'keys', id));
@@ -225,13 +289,11 @@
     }
   }
 
-  // --- KOPIUJ ---
   window.copyKey = function(key) {
     navigator.clipboard.writeText(key);
     alert('Skopiowano: ' + key);
   }
 
-  // --- WYLOGUJ UŻYTKOWNIKA ---
   window.kickUser = async function(id) {
     if (confirm('Czy na pewno chcesz wylogować tego użytkownika?')) {
       await updateDoc(doc(db, 'keys', id), { kicked: true });
@@ -239,41 +301,36 @@
     }
   }
 
-  // --- PRZYWRÓĆ DOSTĘP ---
   window.restoreUser = async function(id) {
     await updateDoc(doc(db, 'keys', id), { kicked: false });
     loadKeys();
   }
 
-  // --- Sprawdź czy klucz wygasł ---
   function isExpired(data) {
     if (!data.expiresAt) return false;
     return new Date() > new Date(data.expiresAt);
   }
 
-  // --- Sprawdź czy użytkownik online (był aktywny ostatnie 20 sekund) ---
   function isOnline(data) {
     if (!data.lastSeen) return false;
     return (new Date() - new Date(data.lastSeen)) < 20000;
   }
 
-  // --- Formatuj datę ---
   function formatDate(iso) {
     if (!iso) return '—';
     return new Date(iso).toLocaleString('pl-PL');
   }
 
-  // --- ŁADOWANIE KLUCZY ---
+  // --- ŁADOWANIE KLUCZY + HISTORIA ---
   window.loadKeys = async function() {
     const list = document.getElementById('keysList');
+    const logDiv = document.getElementById('loginLog');
     const snapshot = await getDocs(collection(db, 'keys'));
 
     if (snapshot.empty) {
       list.innerHTML = '<p style="color:#888;text-align:center;margin-top:16px;">Brak kluczy</p>';
-      document.getElementById('statTotal').innerText = 0;
-      document.getElementById('statActive').innerText = 0;
-      document.getElementById('statUsed').innerText = 0;
-      document.getElementById('statOnline').innerText = 0;
+      logDiv.innerHTML = '<p style="color:#aaa;font-size:13px;">Brak historii</p>';
+      ['statTotal','statActive','statUsed','statOnline'].forEach(id => document.getElementById(id).innerText = 0);
       return;
     }
 
@@ -293,21 +350,42 @@
     document.getElementById('statUsed').innerText = used;
     document.getElementById('statOnline').innerText = online;
 
+    // Historia logowań
+    const allLogs = [];
+    docs.forEach(d => {
+      if (d.loginHistory && d.loginHistory.length > 0) {
+        d.loginHistory.forEach(log => {
+          allLogs.push({ ...log, key: d.key, userName: d.userName });
+        });
+      } else if (d.used && d.updatedAt) {
+        allLogs.push({ time: d.updatedAt, key: d.key, userName: d.userName });
+      }
+    });
+    allLogs.sort((a, b) => new Date(b.time) - new Date(a.time));
+
+    if (allLogs.length === 0) {
+      logDiv.innerHTML = '<p style="color:#aaa;font-size:13px;">Brak historii logowań</p>';
+    } else {
+      logDiv.innerHTML = allLogs.slice(0, 10).map(log => `
+        <div class="log-item">
+          👤 <b>${log.userName || 'Nieznany'}</b> — klucz <b>${log.key}</b>
+          <div class="log-time">${formatDate(log.time)}</div>
+        </div>
+      `).join('');
+    }
+
+    // Lista kluczy
     list.innerHTML = '';
     docs.forEach(data => {
       const expired = isExpired(data);
       const online = isOnline(data);
-
-      let statusClass = 'status-active';
-      let statusText = '🟢 Aktywny';
+      let statusClass = 'status-active', statusText = '🟢 Aktywny';
       if (data.kicked) { statusClass = 'status-kicked'; statusText = '🔴 Wylogowany'; }
       else if (expired) { statusClass = 'status-expired'; statusText = '⚫ Wygasły'; }
       else if (online) { statusClass = 'status-online'; statusText = '🔵 Online'; }
       else if (data.used) { statusClass = 'status-used'; statusText = '🟡 Używany'; }
 
       const typeLabel = data.type === 'day' ? '⏰ 1 dzień' : data.type === 'month' ? '📅 1 miesiąc' : '♾️ Na zawsze';
-      const expLabel = data.expiresAt ? `Wygasa: ${formatDate(data.expiresAt)}` : 'Brak wygaśnięcia';
-      const lastSeenLabel = data.lastSeen ? `Ostatnio online: ${formatDate(data.lastSeen)}` : 'Nigdy nie widziany';
 
       const div = document.createElement('div');
       div.className = 'key-box';
@@ -316,17 +394,16 @@
           <span class="key-text">${data.key}</span>
           <span class="key-status ${statusClass}">${statusText}</span>
         </div>
+        ${data.userName ? `<div class="key-user">👤 ${data.userName}</div>` : ''}
         ${data.note ? `<div class="key-note">📝 ${data.note}</div>` : ''}
         <div class="key-meta">${typeLabel} · Utworzony: ${formatDate(data.createdAt)}</div>
-        <div class="key-meta">${expLabel} · ${lastSeenLabel}</div>
+        <div class="key-meta">Ostatnio online: ${formatDate(data.lastSeen)}</div>
         <div class="btn-group">
           <button class="btn-sm btn-copy" onclick="copyKey('${data.key}')">📋 Kopiuj</button>
           ${data.used && !data.kicked && !expired
-            ? `<button class="btn-sm btn-kick" onclick="kickUser('${data.id}')">🚫 Wyloguj</button>`
-            : ''}
+            ? `<button class="btn-sm btn-kick" onclick="kickUser('${data.id}')">🚫 Wyloguj</button>` : ''}
           ${data.kicked
-            ? `<button class="btn-sm btn-restore" onclick="restoreUser('${data.id}')">✅ Przywróć</button>`
-            : ''}
+            ? `<button class="btn-sm btn-restore" onclick="restoreUser('${data.id}')">✅ Przywróć</button>` : ''}
           <button class="btn-sm btn-delete" onclick="deleteKey('${data.id}')">🗑️ Usuń</button>
         </div>
       `;
