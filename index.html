@@ -29,8 +29,6 @@
     .gen-btn { background: #1a56db; color: white; border: none; border-radius: 8px; padding: 11px 20px; cursor: pointer; font-weight: bold; font-size: 14px; width: auto; white-space: nowrap; }
     .success-msg { color: #28a745; font-size: 13px; margin-top: 8px; }
     .error-msg { color: red; font-size: 13px; margin-top: 8px; text-align: center; }
-
-    /* KONSERWACJA */
     .maintenance-box { background: white; border-radius: 12px; padding: 16px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); display: flex; justify-content: space-between; align-items: center; }
     .maintenance-box h4 { color: #1a1a2e; font-size: 15px; margin-bottom: 4px; }
     .maintenance-box p { font-size: 12px; color: #888; }
@@ -40,14 +38,10 @@
     .toggle-slider:before { content: ""; position: absolute; height: 20px; width: 20px; left: 4px; bottom: 4px; background: white; border-radius: 50%; transition: 0.3s; }
     input:checked + .toggle-slider { background: #1a56db; }
     input:checked + .toggle-slider:before { transform: translateX(24px); }
-
-    /* NOTATKI ADMINA */
     .notes-box { background: white; border-radius: 12px; padding: 16px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
     .notes-box h4 { color: #1a1a2e; font-size: 15px; margin-bottom: 10px; }
     .notes-area { width: 100%; border: 1px solid #ddd; border-radius: 8px; padding: 10px; font-size: 14px; font-family: Arial, sans-serif; resize: vertical; min-height: 80px; margin-bottom: 8px; }
     .save-notes-btn { background: #28a745; color: white; border: none; border-radius: 8px; padding: 8px 16px; cursor: pointer; font-size: 14px; width: auto; font-weight: bold; }
-
-    /* KLUCZE */
     .keys-list { max-height: 450px; overflow-y: auto; }
     .key-box { background: white; border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
     .key-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px; }
@@ -71,8 +65,6 @@
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
     .section-title { font-size: 12px; font-weight: bold; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; margin-top: 4px; }
     h3 { color: #1a1a2e; font-size: 18px; }
-
-    /* HISTORIA LOGOWAŃ */
     .log-box { background: white; border-radius: 12px; padding: 16px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
     .log-box h4 { color: #1a1a2e; font-size: 15px; margin-bottom: 10px; }
     .log-item { padding: 8px 0; border-bottom: 1px solid #f0f0f0; font-size: 13px; color: #444; }
@@ -82,7 +74,6 @@
 </head>
 <body>
 
-<!-- Ekran logowania -->
 <div id="loginScreen" class="login-box">
   <h2>🔐 Panel Admina</h2>
   <input type="password" id="adminPassword" placeholder="Hasło admina" />
@@ -90,15 +81,12 @@
   <p class="error-msg" id="loginError"></p>
 </div>
 
-<!-- Panel admina -->
 <div id="adminPanel" class="login-box panel">
-
   <div class="top-bar">
     <h3>⚙️ Panel Admina</h3>
     <button class="logout-btn" onclick="logout()">Wyloguj</button>
   </div>
 
-  <!-- Statystyki -->
   <div class="stats-grid">
     <div class="stat-box">
       <div class="stat-number" id="statTotal">0</div>
@@ -118,7 +106,6 @@
     </div>
   </div>
 
-  <!-- Tryb konserwacji -->
   <div class="maintenance-box">
     <div>
       <h4>🔧 Tryb konserwacji</h4>
@@ -130,15 +117,13 @@
     </label>
   </div>
 
-  <!-- Notatki admina -->
   <div class="notes-box">
     <h4>📝 Moje notatki</h4>
-    <textarea class="notes-area" id="adminNotes" placeholder="Twoje prywatne notatki — widoczne tylko dla Ciebie..."></textarea>
+    <textarea class="notes-area" id="adminNotes" placeholder="Twoje prywatne notatki..."></textarea>
     <button class="save-notes-btn" onclick="saveNotes()">💾 Zapisz notatki</button>
     <p class="success-msg" id="notesSuccess"></p>
   </div>
 
-  <!-- Generowanie kluczy -->
   <div class="gen-box">
     <h4>🗝️ Generuj nowy klucz</h4>
     <div class="gen-row">
@@ -146,30 +131,27 @@
       <button class="type-btn" id="btn-month" onclick="selectType('month')">📅 1 miesiąc</button>
       <button class="type-btn" id="btn-day" onclick="selectType('day')">⏰ 1 dzień</button>
     </div>
-    <textarea id="keyNote" placeholder="Notatka (np. dla kogo klucz) — opcjonalne" style="margin-top:10px;"></textarea>
+    <textarea id="keyNote" placeholder="Notatka (opcjonalne)" style="margin-top:10px;"></textarea>
     <div class="gen-row">
       <button class="gen-btn" onclick="generateKey()">+ Generuj klucz</button>
     </div>
     <p class="success-msg" id="genSuccess"></p>
   </div>
 
-  <!-- Historia logowań -->
-  <div class="log-box" id="loginLogBox">
+  <div class="log-box">
     <h4>📋 Historia logowań</h4>
     <div id="loginLog"><p style="color:#aaa;font-size:13px;">Ładowanie...</p></div>
   </div>
 
-  <!-- Lista kluczy -->
   <p class="section-title">Klucze dostępu</p>
   <div class="keys-list" id="keysList">
     <p style="color:#888;text-align:center;margin-top:16px;">Ładowanie...</p>
   </div>
-
 </div>
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-  import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+  import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyBmk6wS524JWhphQ60yK8kbzO6CnoVzyRw",
@@ -185,7 +167,6 @@
   const ADMIN_PASSWORD = "simon2025";
   let selectedType = 'forever';
 
-  // --- LOGOWANIE ---
   window.login = function() {
     const pass = document.getElementById('adminPassword').value;
     if (pass === ADMIN_PASSWORD) {
@@ -204,14 +185,12 @@
     document.getElementById('adminPassword').value = '';
   }
 
-  // --- ŁADUJ WSZYSTKO ---
   async function loadAll() {
     await loadKeys();
     await loadSettings();
     loadNotes();
   }
 
-  // --- TRYB KONSERWACJI ---
   window.toggleMaintenance = async function() {
     const enabled = document.getElementById('maintenanceToggle').checked;
     await setDoc(doc(db, 'settings', 'maintenance'), { enabled });
@@ -219,16 +198,13 @@
 
   async function loadSettings() {
     try {
-      const snap = await getDocs(collection(db, 'settings'));
-      snap.forEach(d => {
-        if (d.id === 'maintenance') {
-          document.getElementById('maintenanceToggle').checked = d.data().enabled === true;
-        }
-      });
-    } catch(e) {}
+      const maintenanceDoc = await getDoc(doc(db, 'settings', 'maintenance'));
+      if (maintenanceDoc.exists()) {
+        document.getElementById('maintenanceToggle').checked = maintenanceDoc.data().enabled === true;
+      }
+    } catch(e) { console.log('settings error:', e); }
   }
 
-  // --- NOTATKI ADMINA (localStorage — tylko dla admina) ---
   function loadNotes() {
     const saved = localStorage.getItem('adminNotes');
     if (saved) document.getElementById('adminNotes').value = saved;
@@ -240,14 +216,12 @@
     setTimeout(() => { document.getElementById('notesSuccess').innerText = ''; }, 2000);
   }
 
-  // --- WYBÓR TYPU ---
   window.selectType = function(type) {
     selectedType = type;
     document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('selected'));
     document.getElementById('btn-' + type).classList.add('selected');
   }
 
-  // --- GENEROWANIE ---
   function randomKey() {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     let key = '';
@@ -273,7 +247,7 @@
       key, used: false, kicked: false,
       note: note || null, type: selectedType,
       expiresAt, createdAt: now.toISOString(),
-      lastSeen: null, userName: null, loginHistory: []
+      lastSeen: null, userName: null
     });
     const typeLabel = selectedType === 'forever' ? 'na zawsze' : selectedType === 'month' ? '1 miesiąc' : '1 dzień';
     document.getElementById('genSuccess').innerText = `✅ Klucz ${key} (${typeLabel}) wygenerowany!`;
@@ -321,14 +295,13 @@
     return new Date(iso).toLocaleString('pl-PL');
   }
 
-  // --- ŁADOWANIE KLUCZY + HISTORIA ---
   window.loadKeys = async function() {
     const list = document.getElementById('keysList');
     const logDiv = document.getElementById('loginLog');
     const snapshot = await getDocs(collection(db, 'keys'));
 
     if (snapshot.empty) {
-      list.innerHTML = '<p style="color:#888;text-align:center;margin-top:16px;">Brak kluczy</p>';
+      list.innerHTML = '<p style="color:#888;text-align:center;">Brak kluczy</p>';
       logDiv.innerHTML = '<p style="color:#aaa;font-size:13px;">Brak historii</p>';
       ['statTotal','statActive','statUsed','statOnline'].forEach(id => document.getElementById(id).innerText = 0);
       return;
@@ -338,7 +311,6 @@
     snapshot.forEach(d => docs.push({ id: d.id, ...d.data() }));
     docs.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
-    // Statystyki
     let total = docs.length, active = 0, used = 0, online = 0;
     docs.forEach(d => {
       if (isOnline(d)) online++;
@@ -350,31 +322,21 @@
     document.getElementById('statUsed').innerText = used;
     document.getElementById('statOnline').innerText = online;
 
-    // Historia logowań
     const allLogs = [];
     docs.forEach(d => {
-      if (d.loginHistory && d.loginHistory.length > 0) {
-        d.loginHistory.forEach(log => {
-          allLogs.push({ ...log, key: d.key, userName: d.userName });
-        });
-      } else if (d.used && d.updatedAt) {
+      if (d.used && d.updatedAt) {
         allLogs.push({ time: d.updatedAt, key: d.key, userName: d.userName });
       }
     });
     allLogs.sort((a, b) => new Date(b.time) - new Date(a.time));
+    logDiv.innerHTML = allLogs.length === 0
+      ? '<p style="color:#aaa;font-size:13px;">Brak historii</p>'
+      : allLogs.slice(0, 10).map(log => `
+          <div class="log-item">
+            👤 <b>${log.userName || 'Nieznany'}</b> — klucz <b>${log.key}</b>
+            <div class="log-time">${formatDate(log.time)}</div>
+          </div>`).join('');
 
-    if (allLogs.length === 0) {
-      logDiv.innerHTML = '<p style="color:#aaa;font-size:13px;">Brak historii logowań</p>';
-    } else {
-      logDiv.innerHTML = allLogs.slice(0, 10).map(log => `
-        <div class="log-item">
-          👤 <b>${log.userName || 'Nieznany'}</b> — klucz <b>${log.key}</b>
-          <div class="log-time">${formatDate(log.time)}</div>
-        </div>
-      `).join('');
-    }
-
-    // Lista kluczy
     list.innerHTML = '';
     docs.forEach(data => {
       const expired = isExpired(data);
@@ -384,9 +346,7 @@
       else if (expired) { statusClass = 'status-expired'; statusText = '⚫ Wygasły'; }
       else if (online) { statusClass = 'status-online'; statusText = '🔵 Online'; }
       else if (data.used) { statusClass = 'status-used'; statusText = '🟡 Używany'; }
-
       const typeLabel = data.type === 'day' ? '⏰ 1 dzień' : data.type === 'month' ? '📅 1 miesiąc' : '♾️ Na zawsze';
-
       const div = document.createElement('div');
       div.className = 'key-box';
       div.innerHTML = `
@@ -400,10 +360,8 @@
         <div class="key-meta">Ostatnio online: ${formatDate(data.lastSeen)}</div>
         <div class="btn-group">
           <button class="btn-sm btn-copy" onclick="copyKey('${data.key}')">📋 Kopiuj</button>
-          ${data.used && !data.kicked && !expired
-            ? `<button class="btn-sm btn-kick" onclick="kickUser('${data.id}')">🚫 Wyloguj</button>` : ''}
-          ${data.kicked
-            ? `<button class="btn-sm btn-restore" onclick="restoreUser('${data.id}')">✅ Przywróć</button>` : ''}
+          ${data.used && !data.kicked && !expired ? `<button class="btn-sm btn-kick" onclick="kickUser('${data.id}')">🚫 Wyloguj</button>` : ''}
+          ${data.kicked ? `<button class="btn-sm btn-restore" onclick="restoreUser('${data.id}')">✅ Przywróć</button>` : ''}
           <button class="btn-sm btn-delete" onclick="deleteKey('${data.id}')">🗑️ Usuń</button>
         </div>
       `;
