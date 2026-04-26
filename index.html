@@ -6,34 +6,65 @@
   <title>Panel Admina — CObywatel</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: Arial, sans-serif; background: #f0f2f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-    .login-box { background: white; padding: 40px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); width: 340px; }
+    body { font-family: Arial, sans-serif; background: #f0f2f5; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; padding: 20px; }
+    .login-box { background: white; padding: 40px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); width: 340px; margin: auto; }
     h2 { text-align: center; margin-bottom: 24px; color: #1a1a2e; }
-    input { width: 100%; padding: 12px 16px; border: 1px solid #ddd; border-radius: 8px; font-size: 16px; margin-bottom: 12px; }
-    button { width: 100%; padding: 12px; background: #1a56db; color: white; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; font-weight: bold; }
+    input[type="password"], input[type="text"], textarea { width: 100%; padding: 12px 16px; border: 1px solid #ddd; border-radius: 8px; font-size: 15px; margin-bottom: 10px; font-family: Arial, sans-serif; }
+    textarea { resize: none; height: 60px; }
+    button { width: 100%; padding: 12px; background: #1a56db; color: white; border: none; border-radius: 8px; font-size: 15px; cursor: pointer; font-weight: bold; }
     button:hover { background: #1446c0; }
-    .panel { display: none; }
-    .key-box { background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 8px; padding: 12px 16px; margin-top: 12px; }
-    .key-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
-    .key-text { font-size: 18px; font-weight: bold; color: #1a1a2e; letter-spacing: 2px; }
-    .key-status { font-size: 12px; padding: 4px 10px; border-radius: 20px; font-weight: bold; }
-    .key-status.active { background: #d4edda; color: #155724; }
-    .key-status.used { background: #fff3cd; color: #856404; }
-    .key-status.kicked { background: #f8d7da; color: #721c24; }
-    .btn-group { display: flex; gap: 4px; flex-wrap: wrap; }
-    .copy-btn { background: #6c757d; color: white; border: none; border-radius: 6px; padding: 6px 10px; cursor: pointer; font-size: 12px; width: auto; }
-    .kick-btn { background: #fd7e14; color: white; border: none; border-radius: 6px; padding: 6px 10px; cursor: pointer; font-size: 12px; width: auto; }
-    .restore-btn { background: #28a745; color: white; border: none; border-radius: 6px; padding: 6px 10px; cursor: pointer; font-size: 12px; width: auto; }
-    .delete-btn { background: #dc3545; color: white; border: none; border-radius: 6px; padding: 6px 10px; cursor: pointer; font-size: 12px; width: auto; }
-    .error { color: red; font-size: 13px; margin-top: 8px; text-align: center; }
-    .success { color: green; font-size: 13px; margin-top: 8px; text-align: center; }
-    .keys-list { max-height: 500px; overflow-y: auto; margin-top: 16px; }
-    .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
-    .logout-btn { background: none; border: 1px solid #dc3545; color: #dc3545; border-radius: 8px; padding: 6px 14px; cursor: pointer; font-size: 14px; width: auto; }
-    .generate-btn { margin-top: 0; }
-    h3 { color: #1a1a2e; }
-    .key-date { font-size: 11px; color: #aaa; margin-top: 4px; }
-    .panel { width: 520px !important; }
+
+    /* PANEL */
+    .panel { display: none; width: 600px; max-width: 100%; }
+    .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+    .logout-btn { background: none; border: 1px solid #dc3545; color: #dc3545; border-radius: 8px; padding: 6px 14px; cursor: pointer; font-size: 13px; width: auto; }
+    .logout-btn:hover { background: #dc3545; color: white; }
+
+    /* STATYSTYKI */
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 20px; }
+    .stat-box { background: white; border-radius: 12px; padding: 14px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+    .stat-number { font-size: 26px; font-weight: bold; color: #1a1a2e; }
+    .stat-label { font-size: 11px; color: #888; margin-top: 4px; }
+    .stat-online { color: #28a745; }
+
+    /* GENEROWANIE */
+    .gen-box { background: white; border-radius: 12px; padding: 16px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+    .gen-box h4 { margin-bottom: 12px; color: #1a1a2e; font-size: 15px; }
+    .gen-row { display: flex; gap: 8px; flex-wrap: wrap; }
+    .type-btn { flex: 1; padding: 10px; border-radius: 8px; border: 2px solid #ddd; background: white; color: #444; font-size: 13px; cursor: pointer; font-weight: bold; transition: all 0.2s; width: auto; }
+    .type-btn.selected { border-color: #1a56db; background: #e8f0fe; color: #1a56db; }
+    .gen-btn { background: #1a56db; color: white; border: none; border-radius: 8px; padding: 11px 20px; cursor: pointer; font-weight: bold; font-size: 14px; width: auto; white-space: nowrap; }
+    .gen-btn:hover { background: #1446c0; }
+    .success { color: #28a745; font-size: 13px; margin-top: 8px; }
+    .error-msg { color: red; font-size: 13px; margin-top: 8px; text-align: center; }
+
+    /* LISTA KLUCZY */
+    .keys-list { max-height: 500px; overflow-y: auto; }
+    .key-box { background: white; border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+    .key-row { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 6px; }
+    .key-text { font-size: 17px; font-weight: bold; color: #1a1a2e; letter-spacing: 2px; }
+    .key-note { font-size: 12px; color: #666; margin-top: 4px; font-style: italic; }
+    .key-meta { font-size: 11px; color: #aaa; margin-top: 3px; }
+    .key-status { font-size: 11px; padding: 3px 9px; border-radius: 20px; font-weight: bold; white-space: nowrap; }
+    .status-active { background: #d4edda; color: #155724; }
+    .status-used { background: #fff3cd; color: #856404; }
+    .status-kicked { background: #f8d7da; color: #721c24; }
+    .status-expired { background: #e2e3e5; color: #495057; }
+    .status-online { background: #cce5ff; color: #004085; }
+    .btn-group { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 8px; }
+    .btn-sm { border: none; border-radius: 6px; padding: 5px 10px; cursor: pointer; font-size: 12px; width: auto; color: white; }
+    .btn-copy { background: #6c757d; }
+    .btn-kick { background: #fd7e14; }
+    .btn-restore { background: #28a745; }
+    .btn-delete { background: #dc3545; }
+    .btn-sm:hover { opacity: 0.85; }
+
+    /* BADGE ONLINE */
+    .online-dot { width: 8px; height: 8px; background: #28a745; border-radius: 50%; display: inline-block; margin-right: 4px; animation: pulse 1.5s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+    h3 { color: #1a1a2e; font-size: 18px; }
+    .section-title { font-size: 13px; font-weight: bold; color: #888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; margin-top: 16px; }
   </style>
 </head>
 <body>
@@ -43,20 +74,58 @@
   <h2>🔐 Panel Admina</h2>
   <input type="password" id="adminPassword" placeholder="Hasło admina" />
   <button onclick="login()">Zaloguj się</button>
-  <p class="error" id="loginError"></p>
+  <p class="error-msg" id="loginError"></p>
 </div>
 
 <!-- Panel admina -->
 <div id="adminPanel" class="login-box panel">
+
   <div class="top-bar">
-    <h3>🗝️ Klucze dostępu</h3>
-    <button class="logout-btn" onclick="logout()">Wyloguj admina</button>
+    <h3>⚙️ Panel Admina</h3>
+    <button class="logout-btn" onclick="logout()">Wyloguj</button>
   </div>
-  <button class="generate-btn" onclick="generateKey()">+ Generuj nowy klucz</button>
-  <p class="success" id="genSuccess"></p>
+
+  <!-- Statystyki -->
+  <div class="stats-grid">
+    <div class="stat-box">
+      <div class="stat-number" id="statTotal">0</div>
+      <div class="stat-label">Wszystkie</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number" style="color:#28a745" id="statActive">0</div>
+      <div class="stat-label">Aktywne</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number" style="color:#856404" id="statUsed">0</div>
+      <div class="stat-label">Używane</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number stat-online" id="statOnline">0</div>
+      <div class="stat-label"><span class="online-dot"></span>Online</div>
+    </div>
+  </div>
+
+  <!-- Generowanie kluczy -->
+  <div class="gen-box">
+    <h4>🗝️ Generuj nowy klucz</h4>
+    <div class="gen-row">
+      <button class="type-btn selected" id="btn-forever" onclick="selectType('forever')">♾️ Na zawsze</button>
+      <button class="type-btn" id="btn-month" onclick="selectType('month')">📅 1 miesiąc</button>
+      <button class="type-btn" id="btn-day" onclick="selectType('day')">⏰ 1 dzień</button>
+    </div>
+    <textarea id="keyNote" placeholder="Notatka (np. dla kogo klucz) — opcjonalne" style="margin-top:10px;"></textarea>
+    <div class="gen-row">
+      <button class="gen-btn" onclick="generateKey()">+ Generuj klucz</button>
+    </div>
+    <p class="success" id="genSuccess"></p>
+  </div>
+
+  <!-- Lista kluczy -->
+  <p class="section-title">Klucze dostępu</p>
   <div class="keys-list" id="keysList">
-    <p style="color:#888; text-align:center; margin-top:16px;">Ładowanie kluczy...</p>
+    <p style="color:#888; text-align:center; margin-top:16px;">Ładowanie...</p>
   </div>
+
 </div>
 
 <script type="module">
@@ -76,13 +145,17 @@
   const db = getFirestore(app);
 
   const ADMIN_PASSWORD = "simon2025";
+  let selectedType = 'forever';
 
+  // --- LOGOWANIE ---
   window.login = function() {
     const pass = document.getElementById('adminPassword').value;
     if (pass === ADMIN_PASSWORD) {
       document.getElementById('loginScreen').style.display = 'none';
       document.getElementById('adminPanel').style.display = 'block';
       loadKeys();
+      // Odświeżaj co 15 sekund (online)
+      setInterval(loadKeys, 15000);
     } else {
       document.getElementById('loginError').innerText = 'Złe hasło!';
     }
@@ -94,31 +167,57 @@
     document.getElementById('adminPassword').value = '';
   }
 
+  // --- WYBÓR TYPU KLUCZA ---
+  window.selectType = function(type) {
+    selectedType = type;
+    document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('selected'));
+    document.getElementById('btn-' + type).classList.add('selected');
+  }
+
+  // --- GENEROWANIE ---
   function randomKey() {
     const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
     let key = '';
     for (let i = 0; i < 4; i++) {
       if (i > 0) key += '-';
-      for (let j = 0; j < 4; j++) {
-        key += chars[Math.floor(Math.random() * chars.length)];
-      }
+      for (let j = 0; j < 4; j++) key += chars[Math.floor(Math.random() * chars.length)];
     }
     return key;
   }
 
   window.generateKey = async function() {
     const key = randomKey();
+    const note = document.getElementById('keyNote').value.trim();
+    const now = new Date();
+
+    let expiresAt = null;
+    if (selectedType === 'day') {
+      expiresAt = new Date(now.getTime() + 24 * 60 * 60 * 1000).toISOString();
+    } else if (selectedType === 'month') {
+      const exp = new Date(now);
+      exp.setMonth(exp.getMonth() + 1);
+      expiresAt = exp.toISOString();
+    }
+
     await addDoc(collection(db, 'keys'), {
-      key: key,
+      key,
       used: false,
       kicked: false,
-      createdAt: new Date().toISOString()
+      note: note || null,
+      type: selectedType,
+      expiresAt,
+      createdAt: now.toISOString(),
+      lastSeen: null
     });
-    document.getElementById('genSuccess').innerText = `✅ Klucz ${key} wygenerowany!`;
-    setTimeout(() => { document.getElementById('genSuccess').innerText = ''; }, 3000);
+
+    const typeLabel = selectedType === 'forever' ? 'na zawsze' : selectedType === 'month' ? '1 miesiąc' : '1 dzień';
+    document.getElementById('genSuccess').innerText = `✅ Klucz ${key} (${typeLabel}) wygenerowany!`;
+    document.getElementById('keyNote').value = '';
+    setTimeout(() => { document.getElementById('genSuccess').innerText = ''; }, 4000);
     loadKeys();
   }
 
+  // --- USUŃ ---
   window.deleteKey = async function(id) {
     if (confirm('Czy na pewno chcesz usunąć ten klucz?')) {
       await deleteDoc(doc(db, 'keys', id));
@@ -126,12 +225,13 @@
     }
   }
 
+  // --- KOPIUJ ---
   window.copyKey = function(key) {
     navigator.clipboard.writeText(key);
-    alert(`Skopiowano: ${key}`);
+    alert('Skopiowano: ' + key);
   }
 
-  // WYLOGUJ UŻYTKOWNIKA - ustawia kicked: true
+  // --- WYLOGUJ UŻYTKOWNIKA ---
   window.kickUser = async function(id) {
     if (confirm('Czy na pewno chcesz wylogować tego użytkownika?')) {
       await updateDoc(doc(db, 'keys', id), { kicked: true });
@@ -139,55 +239,95 @@
     }
   }
 
-  // PRZYWRÓĆ DOSTĘP - ustawia kicked: false
+  // --- PRZYWRÓĆ DOSTĘP ---
   window.restoreUser = async function(id) {
     await updateDoc(doc(db, 'keys', id), { kicked: false });
     loadKeys();
   }
 
+  // --- Sprawdź czy klucz wygasł ---
+  function isExpired(data) {
+    if (!data.expiresAt) return false;
+    return new Date() > new Date(data.expiresAt);
+  }
+
+  // --- Sprawdź czy użytkownik online (był aktywny ostatnie 20 sekund) ---
+  function isOnline(data) {
+    if (!data.lastSeen) return false;
+    return (new Date() - new Date(data.lastSeen)) < 20000;
+  }
+
+  // --- Formatuj datę ---
+  function formatDate(iso) {
+    if (!iso) return '—';
+    return new Date(iso).toLocaleString('pl-PL');
+  }
+
+  // --- ŁADOWANIE KLUCZY ---
   window.loadKeys = async function() {
     const list = document.getElementById('keysList');
-    list.innerHTML = '';
     const snapshot = await getDocs(collection(db, 'keys'));
 
     if (snapshot.empty) {
-      list.innerHTML = '<p style="color:#888; text-align:center; margin-top:16px;">Brak kluczy</p>';
+      list.innerHTML = '<p style="color:#888;text-align:center;margin-top:16px;">Brak kluczy</p>';
+      document.getElementById('statTotal').innerText = 0;
+      document.getElementById('statActive').innerText = 0;
+      document.getElementById('statUsed').innerText = 0;
+      document.getElementById('statOnline').innerText = 0;
       return;
     }
 
-    // Sortuj od najnowszych
     const docs = [];
     snapshot.forEach(d => docs.push({ id: d.id, ...d.data() }));
     docs.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
+    // Statystyki
+    let total = docs.length, active = 0, used = 0, online = 0;
+    docs.forEach(d => {
+      if (isOnline(d)) online++;
+      if (!d.used && !isExpired(d) && !d.kicked) active++;
+      if (d.used && !d.kicked && !isExpired(d)) used++;
+    });
+    document.getElementById('statTotal').innerText = total;
+    document.getElementById('statActive').innerText = active;
+    document.getElementById('statUsed').innerText = used;
+    document.getElementById('statOnline').innerText = online;
+
+    list.innerHTML = '';
     docs.forEach(data => {
+      const expired = isExpired(data);
+      const online = isOnline(data);
+
+      let statusClass = 'status-active';
+      let statusText = '🟢 Aktywny';
+      if (data.kicked) { statusClass = 'status-kicked'; statusText = '🔴 Wylogowany'; }
+      else if (expired) { statusClass = 'status-expired'; statusText = '⚫ Wygasły'; }
+      else if (online) { statusClass = 'status-online'; statusText = '🔵 Online'; }
+      else if (data.used) { statusClass = 'status-used'; statusText = '🟡 Używany'; }
+
+      const typeLabel = data.type === 'day' ? '⏰ 1 dzień' : data.type === 'month' ? '📅 1 miesiąc' : '♾️ Na zawsze';
+      const expLabel = data.expiresAt ? `Wygasa: ${formatDate(data.expiresAt)}` : 'Brak wygaśnięcia';
+      const lastSeenLabel = data.lastSeen ? `Ostatnio online: ${formatDate(data.lastSeen)}` : 'Nigdy nie widziany';
+
       const div = document.createElement('div');
       div.className = 'key-box';
-
-      let statusClass = 'active';
-      let statusText = '🟢 Aktywny';
-      if (data.kicked) { statusClass = 'kicked'; statusText = '🔴 Wylogowany'; }
-      else if (data.used) { statusClass = 'used'; statusText = '🟡 Używany'; }
-
-      const date = data.createdAt ? new Date(data.createdAt).toLocaleString('pl-PL') : '';
-
       div.innerHTML = `
         <div class="key-row">
           <span class="key-text">${data.key}</span>
           <span class="key-status ${statusClass}">${statusText}</span>
         </div>
-        <div class="key-row" style="margin-top:8px;">
-          <span class="key-date">Utworzony: ${date}</span>
-          <div class="btn-group">
-            <button class="copy-btn" onclick="copyKey('${data.key}')">📋 Kopiuj</button>
-            ${data.used && !data.kicked
-              ? `<button class="kick-btn" onclick="kickUser('${data.id}')">🚫 Wyloguj</button>`
-              : ''}
-            ${data.kicked
-              ? `<button class="restore-btn" onclick="restoreUser('${data.id}')">✅ Przywróć</button>`
-              : ''}
-            <button class="delete-btn" onclick="deleteKey('${data.id}')">🗑️ Usuń</button>
-          </div>
+        ${data.note ? `<div class="key-note">📝 ${data.note}</div>` : ''}
+        <div class="key-meta">${typeLabel} · Utworzony: ${formatDate(data.createdAt)}</div>
+        <div class="key-meta">${expLabel} · ${lastSeenLabel}</div>
+        <div class="btn-group">
+          <button class="btn-sm btn-copy" onclick="copyKey('${data.key}')">📋 Kopiuj</button>
+          ${data.used && !data.kicked && !expired
+            ? `<button class="btn-sm btn-kick" onclick="kickUser('${data.id}')">🚫 Wyloguj</button>`
+            : ''}
+          ${data.kicked
+            ? `<button class="btn-sm btn-restore" onclick="restoreUser('${data.id}')">✅ Przywróć</button>`
+            : ''}
+          <button class="btn-sm btn-delete" onclick="deleteKey('${data.id}')">🗑️ Usuń</button>
         </div>
       `;
       list.appendChild(div);
